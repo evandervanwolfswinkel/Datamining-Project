@@ -4,5 +4,31 @@
 {% block sidebar %}
 {% endblock %}
 {% block content %}
-Hierin kan je content itereren
+<body>
+<div align="center">
+<div class="container">
+    <div class="card-deck">
+    <div class="card" style="width:400px">
+    <img class="card-img-top" src="/static/disease_image.jpg" alt="Card image" style="width:100%">
+    <div class="card-body">
+      <h4 class="card-title">Diseases</h4>
+      <p class="card-text">Use diseases as primary search goal</p>
+      <a href="Diseases/" class="btn btn-primary stretched-link">Use Diseases</a>
+    </div>
+  </div>
+
+    <div class="card" style="width:400px">
+    <img class="card-img-top" src="/static/compounds_image.jpg" alt="Card image" style="width:100%">
+    <div class="card-body">
+      <h4 class="card-title">Compounds</h4>
+      <p class="card-text">Use compounds as primary search goal</p>
+      <a href="Compounds/" class="btn btn-primary stretched-link">Use Compounds</a>
+    </div>
+  </div>
+    </div>
+</div>
+</div>
+</body>
+</html>
+
 {% endblock %}

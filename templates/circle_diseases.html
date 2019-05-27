@@ -1,0 +1,179 @@
+{% extends "base.html" %}
+{% block head %}  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+ {% endblock %}
+{% block title %}Frontpage{% endblock %}
+{% block sidebar %}
+{% endblock %}
+{% block content %}
+    <div style="position: fixed" align="left">
+    <div align="left" class="container">
+    <ul class="nav nav-tabs">
+  <li class="active"><a href="/DataMiner/Diseases/">Diseases</a></li>
+  <li><a href="/DataMiner/Compounds/">Compounds</a></li>
+
+</ul>
+        </div>
+
+<head>
+     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <style>
+
+    .node {
+      cursor: pointer;
+    }
+
+    .node:hover {
+      stroke: #000;
+      stroke-width: 1.5px;
+    }
+
+    .node--leaf {
+      fill: white;
+    }
+
+    .label {
+      font: 11px "Helvetica Neue", Helvetica, Arial, sans-serif;
+      text-anchor: middle;
+      text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff;
+    }
+
+    .label,
+    .node--root,
+    .node--leaf {
+      pointer-events: none;
+    }
+
+  </style>
+
+</head>
+<body>
+
+
+<div style="position: fixed"  class="form-group" align="center">
+Filter Compounds
+  <select id="select-color2">
+    <option value="greater2">Greater than 100</option>
+    <option value="vitaminec">Vitamine C</option>
+      <option value="magnesium">Magnesium</option>
+      <option value="vitamineb9">Vitamin B9</option>
+  </select>
+</div>
+
+
+	<svg width="650" height="650"></svg>
+
+  <script>
+
+     var colorSelect2 = d3.select("#select-color2")
+    	.on("change", function() {
+        	let colorOption2 = colorSelect2.property('value')
+        	d3.selectAll('circle')
+          	.transition()
+          	.duration(750)
+            .style('fill', function(d){
+            	if(!d.children) {
+                if (colorOption2 == "greater2"){
+                  return d.data.size > 100 ? "GoldenRod" : "white"
+                }
+                if (colorOption2 == "vitaminec"){
+                  return d.data.name.startsWith('Vitamin C') ? "LightCoral" : "white"
+                }
+                if (colorOption2 == "magnesium"){
+                  return d.data.name.startsWith('Magnesium') ? "LightCoral" : "white"
+                }
+                if (colorOption2 == "vitamineb9"){
+                  return d.data.name.startsWith('Vitamin B9') ? "LightCoral" : "white"
+                }
+              }
+            	else {
+                return "null"
+              }
+          	})
+      })
+
+
+    var svg = d3.select("svg"),
+        margin = 20,
+        diameter = +svg.attr("width"),
+        g = svg.append("g").attr("transform", "translate(" + diameter / 2 + "," + diameter / 2 + ")");
+
+    var color = d3.scaleLinear()
+        .domain([-1, 5])
+        .range(["hsl(152,10%,80%)", "hsl(228,10%,40%)"])
+        .interpolate(d3.interpolateHcl);
+
+    var pack = d3.pack()
+        .size([diameter - margin, diameter - margin])
+        .padding(2);
+
+    d3.json("/static/flare.json", function(error, root) {
+      if (error) throw error;
+
+      root = d3.hierarchy(root)
+          .sum(function(d) { return d.size; })
+          .sort(function(a, b) { return b.value - a.value; });
+
+      var focus = root,
+          nodes = pack(root).descendants(),
+          view;
+
+      var circle = g.selectAll("circle")
+        .data(nodes)
+        .enter().append("circle")
+          .attr("class", function(d) { return d.parent ? d.children ? "node" : "node node--leaf" : "node node--root"; })
+          .style("fill", function(d) { return d.children ? color(d.depth) : null; })
+          .on("click", function(d) { if (focus !== d) zoom(d), d3.event.stopPropagation(); });
+
+      var text = g.selectAll("text")
+        .data(nodes)
+        .enter().append("text")
+          .attr("class", "label")
+          .style("fill-opacity", function(d) { return d.parent === root ? 1 : 0; })
+          .style("display", function(d) { return d.parent === root ? "inline" : "none"; })
+          .text(function(d) { return d.data.name; });
+
+      var node = g.selectAll("circle,text");
+
+      svg
+          .style("background", color(-1))
+          .on("click", function() { zoom(root); });
+
+      zoomTo([root.x, root.y, root.r * 2 + margin]);
+
+      function zoom(d) {
+        var focus0 = focus; focus = d;
+
+        var transition = d3.transition()
+            .duration(d3.event.altKey ? 7500 : 750)
+            .tween("zoom", function(d) {
+              var i = d3.interpolateZoom(view, [focus.x, focus.y, focus.r * 2 + margin]);
+              return function(t) { zoomTo(i(t)); };
+            });
+
+        transition.selectAll("text")
+          .filter(function(d) { return d.parent === focus || this.style.display === "inline"; })
+            .style("fill-opacity", function(d) { return d.parent === focus ? 1 : 0; })
+            .on("start", function(d) { if (d.parent === focus) this.style.display = "inline"; })
+            .on("end", function(d) { if (d.parent !== focus) this.style.display = "none"; });
+      }
+
+      function zoomTo(v) {
+        var k = diameter / v[2]; view = v;
+        node.attr("transform", function(d) { return "translate(" + (d.x - v[0]) * k + "," + (d.y - v[1]) * k + ")"; });
+        circle.attr("r", function(d) { return d.r * k; });
+
+      }
+    });
+
+  </script>
+
+</body>
+ </div>
+</html>
+
+{% endblock %}
