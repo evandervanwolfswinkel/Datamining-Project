@@ -9,3 +9,6 @@ def circle_diseases(request):
 
 def circle_compounds(request):
     return render(request, "circle_compounds.html")
+
+def database(request):
+    return render(request, "database.html")
