@@ -1,26 +1,52 @@
-{"name":"world","children":
-
-[
-
-{"name":"Diabetes","children":
-[
-{"name":"Fatty Acids","size":1},
-{"name":"Vitamin C","size":6},
-{"name":"Magnesium","size":15}
-]},
-
-{"name":"Cancer","children":
-[
-{"name":"Fatty Acids","size":1},
-{"name":"Vitamin C","size":6},
-{"name":"Magnesium","size":10}
-]},
-
-{"name":"Cardiovascular","children":
-[
-{"name":"Vitamin B9","size":5},
-{"name":"Vitamin B8","size":2},
-{"name":"Kalium","size":13}
-]
-}]}
-
+{
+    "name": "diseases",
+    "children": [
+        {
+            "name": "cancer",
+            "children": [
+                {
+                    "name": "kinase",
+                    "size": 20
+                },
+                {
+                    "name": "gallic acid",
+                    "size": 2
+                },
+                {
+                    "name": "caffeic acid",
+                    "size": 1
+                },
+                {
+                    "name": "catechin",
+                    "size": 1
+                }
+            ]
+        },
+        {
+            "name": "Melanoma",
+            "children": [
+                {
+                    "name": "kinase",
+                    "size": 2
+                },
+                {
+                    "name": "caffeic acid",
+                    "size": 1
+                }
+            ]
+        },
+        {
+            "name": "obesity",
+            "children": [
+                {
+                    "name": "kinase",
+                    "size": 6
+                },
+                {
+                    "name": "catechin",
+                    "size": 1
+                }
+            ]
+        }
+    ]
+}

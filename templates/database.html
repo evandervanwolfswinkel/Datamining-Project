@@ -1,8 +1,33 @@
 {% extends "base.html" %}
 
-{% block title %}Database{% endblock %}
+{% block title %}Bitter gourd Data Miner - Database{% endblock %}
 {% block sidebar %}
 {% endblock %}
 {% block content %}
-
+    <class style="position: absolute; padding: 15px">
+        <div style="padding: 6px; position: relative; float: left;">
+            <div style="position: absolute; top: -20px; padding: 3px">Disease terms</div>
+            <select size="20">
+                {% for term in disease_list %}
+                    <option value="{{ term }}">{{ term }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    <div style="padding: 6px; position: relative; float: left;">
+        <div style="position: absolute; top: -20px; padding: 3px">Compound terms</div>
+            <select size="20">
+                {% for term in compound_list %}
+                    <option value="{{ term }}">{{ term }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    <div style="padding: 6px; position: relative; float: left;">
+        <div style="position: absolute; top: -20px; padding: 3px">Bitter gourd synonyms</div>
+            <select size="20">
+                {% for term in bitter_list %}
+                    <option value="{{ term }}">{{ term }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </class>
 {% endblock %}

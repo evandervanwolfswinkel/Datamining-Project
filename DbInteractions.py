@@ -307,9 +307,9 @@ class DbInteractions:
 
 
 dbi = DbInteractions()
-dbi.add_rm('comp', '', False)
+#dbi.add_rm('comp', '', False)
 #dbi.renew_db()
-dbi.update_relations()
+#dbi.update_relations()
 
 dict = dbi.get_relations()[0]
 for key in dict:
