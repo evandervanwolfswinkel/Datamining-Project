@@ -5,6 +5,17 @@
 {% endblock %}
 {% block content %}
     <class style="position: absolute; padding: 15px">
+    <div>
+        <form action="/DataMiner/Database/">
+            {% csrf_token %}
+             <select name="function"><option value="add">Add</option><option value="remove">Remove</option></select>
+            term: <input type="text" name="term">
+            <input type="radio" name="type" value="dis"> Disease
+            <input type="radio" name="type" value="comp"> Compound
+            <input type="submit" value="Submit"><br>
+            <br>
+        </form>
+    </div>
         <div style="padding: 6px; position: relative; float: left;">
             <div style="position: absolute; top: -20px; padding: 3px">Disease terms</div>
             <select size="20">

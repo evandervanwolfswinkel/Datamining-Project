@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponseRedirect
 import VisualisationLogic
 from DbInteractions import DbInteractions
 
@@ -14,6 +14,29 @@ def circle_compounds(request):
 
 def database(request):
     dbi = DbInteractions()
+    if request.method == 'GET':
+        type = request.GET.get('type')
+        function = request.GET.get('function')
+        term = request.GET.get('term')
+        if type == 'dis':
+            if function == 'add':
+                dbi.add_rm('dis', term, True)
+                dbi.update_relations()
+                return HttpResponseRedirect('/DataMiner/Database/')
+            if function == 'remove':
+                dbi.add_rm('dis', term, False)
+                dbi.update_relations()
+                return HttpResponseRedirect('/DataMiner/Database/')
+        if type == 'comp':
+            if function == 'add':
+                dbi.add_rm('comp', term, True)
+                dbi.update_relations()
+                return HttpResponseRedirect('/DataMiner/Database/')
+            if function == 'remove':
+                dbi.add_rm('comp', term, False)
+                dbi.update_relations()
+                return HttpResponseRedirect('/DataMiner/Database/')
+
     term_lists = dbi.get_lists()
     bitter_snym_list = term_lists[0]
     disease_snym_list = term_lists[1]
