@@ -40,5 +40,23 @@
                 {% endfor %}
             </select>
         </div>
+    <div title="Dont forget to update relationships after changing term lists!">
+        <form action="/DataMiner/UpdatingRelationships/" method="post">
+            {% csrf_token %}
+        <input type="submit" value="Update relationships">
+        </form>
+        <div onclick="infomsg()" style="font-size: 20px; right: 450px; top: 535px; position: absolute"> ℹ </div>
+    </div>
+    <div>
+        Amount of relationships: {{ relationcount }} <br>
+        Amount of articles:      {{ articlecount }}
+    </div>
+
     </class>
+    <script>
+function infomsg() {
+  alert("After adding or removing search terms, you should always update the relationships tied to those " +
+      "terms, this process may take some time depending on how many search terms the lists contain.");
+}
+</script>
 {% endblock %}

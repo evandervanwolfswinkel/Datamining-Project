@@ -21,27 +21,34 @@ def database(request):
         if type == 'dis':
             if function == 'add':
                 dbi.add_rm('dis', term, True)
-                dbi.update_relations()
                 return HttpResponseRedirect('/DataMiner/Database/')
             if function == 'remove':
                 dbi.add_rm('dis', term, False)
-                dbi.update_relations()
                 return HttpResponseRedirect('/DataMiner/Database/')
         if type == 'comp':
             if function == 'add':
                 dbi.add_rm('comp', term, True)
-                dbi.update_relations()
                 return HttpResponseRedirect('/DataMiner/Database/')
             if function == 'remove':
                 dbi.add_rm('comp', term, False)
-                dbi.update_relations()
                 return HttpResponseRedirect('/DataMiner/Database/')
 
     term_lists = dbi.get_lists()
     bitter_snym_list = term_lists[0]
     disease_snym_list = term_lists[1]
     compound_snym_list = term_lists[2]
-
+    relationcount = dbi.get_relation_amount()
+    articlecount = dbi.get_db_length()
     return render(request, "database.html", {'disease_list':disease_snym_list,
                                              'compound_list':compound_snym_list,
-                                             'bitter_list':bitter_snym_list})
+                                             'bitter_list':bitter_snym_list,
+                                             'relationcount': relationcount,
+                                             'articlecount': articlecount})
+
+def update_relationships(request):
+    dbi = DbInteractions()
+    if request.method == 'POST':
+        dbi.update_relations()
+        return HttpResponseRedirect('/DataMiner/Database/')
+    else:
+        return HttpResponseRedirect('/DataMiner/Database/')
