@@ -1,0 +1,234 @@
+{
+    "name": "compounds",
+    "children": [
+        {
+            "name": "DNA",
+            "children": [
+                {
+                    "name": "Malignant",
+                    "size": 1
+                },
+                {
+                    "name": "cancer",
+                    "size": 28
+                },
+                {
+                    "name": "Melanoma",
+                    "size": 1
+                },
+                {
+                    "name": "Leukemia",
+                    "size": 1
+                },
+                {
+                    "name": "Kaposi",
+                    "size": 1
+                },
+                {
+                    "name": "Sarcoma",
+                    "size": 1
+                },
+                {
+                    "name": "diabetes",
+                    "size": 11
+                }
+            ]
+        },
+        {
+            "name": "RNA",
+            "children": [
+                {
+                    "name": "Malignant",
+                    "size": 2
+                },
+                {
+                    "name": "diabetes",
+                    "size": 70
+                },
+                {
+                    "name": "cancer",
+                    "size": 24
+                },
+                {
+                    "name": "Leukemia",
+                    "size": 3
+                },
+                {
+                    "name": "Kaposi",
+                    "size": 1
+                },
+                {
+                    "name": "Sarcoma",
+                    "size": 1
+                },
+                {
+                    "name": "Melanoma",
+                    "size": 2
+                }
+            ]
+        },
+        {
+            "name": "glucose",
+            "children": [
+                {
+                    "name": "diabetes",
+                    "size": 147
+                },
+                {
+                    "name": "cancer",
+                    "size": 7
+                }
+            ]
+        },
+        {
+            "name": "lipid",
+            "children": [
+                {
+                    "name": "diabetes",
+                    "size": 52
+                },
+                {
+                    "name": "cancer",
+                    "size": 12
+                }
+            ]
+        },
+        {
+            "name": "carbohydrate",
+            "children": [
+                {
+                    "name": "diabetes",
+                    "size": 14
+                },
+                {
+                    "name": "Malignant",
+                    "size": 1
+                }
+            ]
+        },
+        {
+            "name": "chlorogenic acid",
+            "children": [
+                {
+                    "name": "diabetes",
+                    "size": 1
+                }
+            ]
+        },
+        {
+            "name": "vitamin d",
+            "children": [
+                {
+                    "name": "diabetes",
+                    "size": 1
+                }
+            ]
+        },
+        {
+            "name": "cellulose",
+            "children": [
+                {
+                    "name": "diabetes",
+                    "size": 2
+                },
+                {
+                    "name": "cancer",
+                    "size": 1
+                }
+            ]
+        },
+        {
+            "name": "gallic acid",
+            "children": [
+                {
+                    "name": "cancer",
+                    "size": 2
+                },
+                {
+                    "name": "diabetes",
+                    "size": 2
+                }
+            ]
+        },
+        {
+            "name": "catechin",
+            "children": [
+                {
+                    "name": "cancer",
+                    "size": 1
+                },
+                {
+                    "name": "diabetes",
+                    "size": 6
+                }
+            ]
+        },
+        {
+            "name": "Benzoic acid",
+            "children": [
+                {
+                    "name": "diabetes",
+                    "size": 1
+                }
+            ]
+        },
+        {
+            "name": "ferulic acid",
+            "children": [
+                {
+                    "name": "diabetes",
+                    "size": 3
+                }
+            ]
+        },
+        {
+            "name": "epicatechin",
+            "children": [
+                {
+                    "name": "diabetes",
+                    "size": 1
+                }
+            ]
+        },
+        {
+            "name": "rutin",
+            "children": [
+                {
+                    "name": "diabetes",
+                    "size": 1
+                }
+            ]
+        },
+        {
+            "name": "caffeic acid",
+            "children": [
+                {
+                    "name": "cancer",
+                    "size": 1
+                },
+                {
+                    "name": "Melanoma",
+                    "size": 1
+                }
+            ]
+        },
+        {
+            "name": "vitamin a",
+            "children": [
+                {
+                    "name": "cancer",
+                    "size": 1
+                }
+            ]
+        },
+        {
+            "name": "Sinapic acid",
+            "children": [
+                {
+                    "name": "diabetes",
+                    "size": 1
+                }
+            ]
+        }
+    ]
+}

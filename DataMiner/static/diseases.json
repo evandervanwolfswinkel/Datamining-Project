@@ -1,0 +1,184 @@
+{
+    "name": "diseases",
+    "children": [
+        {
+            "name": "Malignant",
+            "children": [
+                {
+                    "name": "DNA",
+                    "size": 1
+                },
+                {
+                    "name": "RNA",
+                    "size": 2
+                },
+                {
+                    "name": "carbohydrate",
+                    "size": 1
+                }
+            ]
+        },
+        {
+            "name": "cancer",
+            "children": [
+                {
+                    "name": "DNA",
+                    "size": 28
+                },
+                {
+                    "name": "RNA",
+                    "size": 24
+                },
+                {
+                    "name": "lipid",
+                    "size": 12
+                },
+                {
+                    "name": "glucose",
+                    "size": 7
+                },
+                {
+                    "name": "gallic acid",
+                    "size": 2
+                },
+                {
+                    "name": "catechin",
+                    "size": 1
+                },
+                {
+                    "name": "cellulose",
+                    "size": 1
+                },
+                {
+                    "name": "caffeic acid",
+                    "size": 1
+                },
+                {
+                    "name": "vitamin a",
+                    "size": 1
+                }
+            ]
+        },
+        {
+            "name": "Melanoma",
+            "children": [
+                {
+                    "name": "DNA",
+                    "size": 1
+                },
+                {
+                    "name": "RNA",
+                    "size": 2
+                },
+                {
+                    "name": "caffeic acid",
+                    "size": 1
+                }
+            ]
+        },
+        {
+            "name": "diabetes",
+            "children": [
+                {
+                    "name": "glucose",
+                    "size": 147
+                },
+                {
+                    "name": "RNA",
+                    "size": 70
+                },
+                {
+                    "name": "lipid",
+                    "size": 52
+                },
+                {
+                    "name": "DNA",
+                    "size": 11
+                },
+                {
+                    "name": "carbohydrate",
+                    "size": 14
+                },
+                {
+                    "name": "chlorogenic acid",
+                    "size": 1
+                },
+                {
+                    "name": "vitamin d",
+                    "size": 1
+                },
+                {
+                    "name": "cellulose",
+                    "size": 2
+                },
+                {
+                    "name": "gallic acid",
+                    "size": 2
+                },
+                {
+                    "name": "catechin",
+                    "size": 6
+                },
+                {
+                    "name": "Benzoic acid",
+                    "size": 1
+                },
+                {
+                    "name": "ferulic acid",
+                    "size": 3
+                },
+                {
+                    "name": "epicatechin",
+                    "size": 1
+                },
+                {
+                    "name": "rutin",
+                    "size": 1
+                },
+                {
+                    "name": "Sinapic acid",
+                    "size": 1
+                }
+            ]
+        },
+        {
+            "name": "Leukemia",
+            "children": [
+                {
+                    "name": "DNA",
+                    "size": 1
+                },
+                {
+                    "name": "RNA",
+                    "size": 3
+                }
+            ]
+        },
+        {
+            "name": "Kaposi",
+            "children": [
+                {
+                    "name": "DNA",
+                    "size": 1
+                },
+                {
+                    "name": "RNA",
+                    "size": 1
+                }
+            ]
+        },
+        {
+            "name": "Sarcoma",
+            "children": [
+                {
+                    "name": "DNA",
+                    "size": 1
+                },
+                {
+                    "name": "RNA",
+                    "size": 1
+                }
+            ]
+        }
+    ]
+}
