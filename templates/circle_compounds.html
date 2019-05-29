@@ -57,10 +57,9 @@
 <div style="position: fixed"  class="form-group" align="center">
 Filter Diseases
   <select id="select-color1">
-    <option value="greater">Greater than 100</option>
-    <option value="cancer">Cancer</option>
-      <option value="cardiovascular">Cardiovascular</option>
-      <option value="diabetes">Diabetes</option>
+    {% for term in disease_list %}
+    <option value="{{term}}">{{term}}</option>
+      {% endfor %}
   </select>
 </div>
 
@@ -71,27 +70,17 @@ Filter Diseases
 
     var colorSelect1 = d3.select("#select-color1")
     	.on("change", function() {
-        	let colorOption1 = colorSelect1.property('value')
+        	let colorOption2 = colorSelect1.property('value')
         	d3.selectAll('circle')
           	.transition()
           	.duration(750)
             .style('fill', function(d){
             	if(!d.children) {
-                if (colorOption1 == "greater"){
-                  return d.data.size > 100 ? "GoldenRod" : "white"
+                 {% for term in disease_list %}
+                if (colorOption2 == "{{term}}"){
+                  return d.data.name.startsWith('{{term}}') ? "LightCoral" : "white"
                 }
-                if (colorOption1 == "cancer"){
-                  return d.data.name.startsWith('Cancer') ? "LightCoral" : "white"
-                }
-                if (colorOption1 == "cardiovascular"){
-                  return d.data.name.startsWith('Cardiovascular') ? "LightCoral" : "white"
-                }
-                if (colorOption1 == "cardiovascular"){
-                  return d.data.name.startsWith('Cardiovascular') ? "LightCoral" : "white"
-                }
-                if (colorOption1 == "diabetes"){
-                  return d.data.name.startsWith('Diabetes') ? "LightCoral" : "white"
-                }
+                {% endfor %}
               }
             	else {
                 return "null"
@@ -115,7 +104,7 @@ Filter Diseases
         .size([diameter - margin, diameter - margin])
         .padding(2);
 
-    d3.json("/static/flare.json", function(error, root) {
+    d3.json("/static/compounds.json", function(error, root) {
       if (error) throw error;
 
       root = d3.hierarchy(root)

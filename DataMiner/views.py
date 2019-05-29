@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponseRedirect
-import VisualisationLogic
+from VisualisationLogic import set_value, write_json
 from DbInteractions import DbInteractions
 
 # Create your views here.
@@ -7,10 +7,22 @@ def index(request):
     return render(request, "index.html")
 
 def circle_diseases(request):
-    return render(request, "circle_diseases.html")
+    dbi = DbInteractions()
+    dict_dis = dbi.get_relations()[0]
+    dict_dis = set_value(dict_dis)
+    write_json(dict_dis, "diseases")
+    term_lists = dbi.get_lists()
+    compound_snym_list = term_lists[2]
+    return render(request, "circle_diseases.html", {'compound_list':compound_snym_list})
 
 def circle_compounds(request):
-    return render(request, "circle_compounds.html")
+    dbi = DbInteractions()
+    dict_dis = dbi.get_relations()[1]
+    dict_dis = set_value(dict_dis)
+    write_json(dict_dis, "compounds")
+    term_lists = dbi.get_lists()
+    disease_snym_list = term_lists[1]
+    return render(request, "circle_compounds.html", {'disease_list':disease_snym_list})
 
 def database(request):
     dbi = DbInteractions()

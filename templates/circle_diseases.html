@@ -57,10 +57,9 @@
 <div style="position: fixed"  class="form-group" align="center">
 Filter Compounds
   <select id="select-color2">
-    <option value="greater2">Greater than 100</option>
-    <option value="vitaminec">Vitamine C</option>
-      <option value="magnesium">Magnesium</option>
-      <option value="vitamineb9">Vitamin B9</option>
+      {% for term in compound_list %}
+    <option value="{{term}}">{{term}}</option>
+      {% endfor %}
   </select>
 </div>
 
@@ -77,18 +76,11 @@ Filter Compounds
           	.duration(750)
             .style('fill', function(d){
             	if(!d.children) {
-                if (colorOption2 == "greater2"){
-                  return d.data.size > 100 ? "GoldenRod" : "white"
+                {% for term in compound_list %}
+                if (colorOption2 == "{{term}}"){
+                  return d.data.name.startsWith('{{term}}') ? "LightCoral" : "white"
                 }
-                if (colorOption2 == "vitaminec"){
-                  return d.data.name.startsWith('Vitamin C') ? "LightCoral" : "white"
-                }
-                if (colorOption2 == "magnesium"){
-                  return d.data.name.startsWith('Magnesium') ? "LightCoral" : "white"
-                }
-                if (colorOption2 == "vitamineb9"){
-                  return d.data.name.startsWith('Vitamin B9') ? "LightCoral" : "white"
-                }
+                {% endfor %}
               }
             	else {
                 return "null"
@@ -111,7 +103,7 @@ Filter Compounds
         .size([diameter - margin, diameter - margin])
         .padding(2);
 
-    d3.json("/static/flare.json", function(error, root) {
+    d3.json("/static/diseases.json", function(error, root) {
       if (error) throw error;
 
       root = d3.hierarchy(root)
