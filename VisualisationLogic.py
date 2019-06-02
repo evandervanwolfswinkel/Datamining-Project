@@ -1,5 +1,5 @@
 # Author: Valerie Verhalle
-# Projectgroup: tutor blok8
+# Projectgroup: tutor blok 8
 # date: 28-5-2019
 
 import json
@@ -36,12 +36,11 @@ return: als return schrijft deze functie een bestand 'compounds.json' of 'diseas
 """
 
 
-def write_json(dict, name):
+def write_circlejson(dict, name):
     control_list = []
     child_dict = {}
     full_dict = {"name": "{}".format(name),
                  "children": []}
-
     for i in dict.keys():
         for j in dict[i].keys():
 
@@ -60,10 +59,7 @@ def write_json(dict, name):
         full_dict["children"].append({"name": i, "children": child_dict})
 
     dic_tem = json.dumps(full_dict, indent=4)
-    path = "DataMiner/static/"
-    with open(path+'{}.json'.format(name), 'w') as file:
-        file.write(dic_tem)
-        file.close()
+    writetofile(dic_tem, name)
 
 
 """functie: Telt het aantal pubmedID's per combinatie van 
@@ -82,3 +78,17 @@ def set_value(dict):
 
     return dict
 
+
+def writetofile(data, name):
+    with open(definestaticpath() + '{}.json'.format(name), 'w') as file:
+        file.write(data)
+        file.close()
+
+def openjson(name):
+    path = definestaticpath()
+    with open(path + '{}.json'.format(name)) as file:
+        jsonobj = json.load(file)
+    return jsonobj
+def definestaticpath():
+    path = "DataMiner/static/"
+    return path

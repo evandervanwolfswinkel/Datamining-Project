@@ -1,28 +1,23 @@
 from django.shortcuts import render, HttpResponseRedirect
-from VisualisationLogic import set_value, write_json
+from VisualisationLogic import set_value, write_circlejson, writetofile, openjson
 from DbInteractions import DbInteractions
 
-# Create your views here.
+
 def index(request):
     return render(request, "index.html")
 
+def about(request):
+    return render(request, "about.html")
+
 def circle_diseases(request):
-    dbi = DbInteractions()
-    dict_dis = dbi.get_relations()[0]
-    dict_dis = set_value(dict_dis)
-    write_json(dict_dis, "diseases")
-    term_lists = dbi.get_lists()
-    compound_snym_list = term_lists[2]
-    return render(request, "circle_diseases.html", {'compound_list':compound_snym_list})
+    compound_snym_list = openjson("compoundtermlist")
+    articlejson = openjson("articlesdis")
+    return render(request, "circle_diseases.html", {'compound_list':compound_snym_list,'articledislist':articlejson})
 
 def circle_compounds(request):
-    dbi = DbInteractions()
-    dict_dis = dbi.get_relations()[1]
-    dict_dis = set_value(dict_dis)
-    write_json(dict_dis, "compounds")
-    term_lists = dbi.get_lists()
-    disease_snym_list = term_lists[1]
-    return render(request, "circle_compounds.html", {'disease_list':disease_snym_list})
+    disease_snym_list = openjson("diseasetermlist")
+    articlejson = openjson("articlescomp")
+    return render(request, "circle_compounds.html", {'disease_list':disease_snym_list,'articlecomplist':articlejson})
 
 def database(request):
     dbi = DbInteractions()
@@ -61,6 +56,13 @@ def update_relationships(request):
     dbi = DbInteractions()
     if request.method == 'POST':
         dbi.update_relations()
+        term_lists = dbi.get_lists()
+        write_circlejson(set_value(dbi.get_relations()[0]), "diseases")
+        write_circlejson(set_value(dbi.get_relations()[1]), "compounds")
+        writetofile(dbi.return_json_termlist(term_lists[1]), "diseasetermlist")
+        writetofile(dbi.return_json_termlist(term_lists[2]), "compoundtermlist")
+        writetofile(dbi.return_article_dict(dbi.get_relations()[0]), "articlesdis")
+        writetofile(dbi.return_article_dict(dbi.get_relations()[1]), "articlescomp")
         return HttpResponseRedirect('/DataMiner/Database/')
     else:
         return HttpResponseRedirect('/DataMiner/Database/')

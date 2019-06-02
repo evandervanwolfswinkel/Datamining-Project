@@ -4,6 +4,7 @@ import importlib.util
 import re
 import mysql.connector.errors
 import datetime
+import json
 
 Entrez.email = "anton.ligterink@gmail.com"
 
@@ -304,13 +305,32 @@ class DbInteractions:
         print(str(datetime.datetime.now()) + "\t\t\tRetrieved articles from MySQL database")
         return self.article_list
 
+    def return_article_dict(self, dict_type):
+        """Method for creating a dictionary of all article information for site use by JSON format
+        :return: tempjson(dict): dictionary of articles in JSON format
+        """
+        articles = self.get_mysql_articles()
+        tempdict = {}
+        for p_id, p_info in dict_type.items():
+            for key in p_info:
+                for value in p_info[key]:
+                    for article in articles:
+                        if str(value) == str(article.pubmed_id):
+                            title = str(p_id) + " - " + str(article.get_title())
+                            tempdict[value] = [title, article.get_year(), article.get_abstract(), article.get_pubmed_id(), key]
+        self.tempjson = json.dumps(tempdict, indent=4)
+        return self.tempjson
+
+    def return_json_termlist(self, term_list):
+        """Method for creating a JSON list from a term_list
+        :return: tempjson(list): list of searchterms in JSON
+        """
+        self.tempjson = json.dumps(term_list)
+        return self.tempjson
 
 
-dbi = DbInteractions()
-#dbi.add_rm('comp', '', False)
-#dbi.renew_db()
-#dbi.update_relations()
 
-dict = dbi.get_relations()[0]
-for key in dict:
-    print(key, dict[key])
+
+
+
+

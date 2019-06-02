@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Bitter gourd Data Miner - About{% endblock %}
+{% block sidebar %}
+{% endblock %}
+{% block content %}
+    <div style="position: center">
+    <h3>Disclaimer:</h3>
+The database that contains all of the PubMed articles, must be updated from time to time. So new articles can be added to the database.
+The application searches only for relations between articles by search terms that occur in our collection of search terms. If you can’t find a specific search term make sure it occurs in our collection, if not, submit the term.
+
+    <h3>About:</h3>
+The purpose of this application is to visualize (known and unknown) relations between PubMed articles through the combination of different ‘search terms’. This combination of terms contains a disease, that can be linked to bitter gourd, and a compound, that can be linked to bitter gourd. This application has included different names given to the plant bitter gourd.
+As a visualization of the data we have chosen to create an interactive type of graph: circle packing. With this way of visualizing, the large amount of data is well organized so the user won’t lose overview of the data.
+</div>
+{% endblock %}
