@@ -39,6 +39,13 @@ def database(request):
             if function == 'remove':
                 dbi.add_rm('comp', term, False)
                 return HttpResponseRedirect('/DataMiner/Database/')
+        if type == 'bg':
+            if function == 'add':
+                dbi.add_rm('bg', term, True)
+                return HttpResponseRedirect('/DataMiner/Database/')
+            if function == 'remove':
+                dbi.add_rm('bg', term, False)
+                return HttpResponseRedirect('/DataMiner/Database/')
 
     term_lists = dbi.get_lists()
     bitter_snym_list = term_lists[0]
@@ -57,12 +64,28 @@ def update_relationships(request):
     if request.method == 'POST':
         dbi.update_relations()
         term_lists = dbi.get_lists()
-        write_circlejson(set_value(dbi.get_relations()[0]), "diseases")
-        write_circlejson(set_value(dbi.get_relations()[1]), "compounds")
-        writetofile(dbi.return_json_termlist(term_lists[1]), "diseasetermlist")
-        writetofile(dbi.return_json_termlist(term_lists[2]), "compoundtermlist")
-        writetofile(dbi.return_article_dict(dbi.get_relations()[0]), "articlesdis")
-        writetofile(dbi.return_article_dict(dbi.get_relations()[1]), "articlescomp")
+        disease_term_list = term_lists[1]
+        compound_term_list = term_lists[2]
+        disease_relations = dbi.get_relations()[0]
+        compound_relations = dbi.get_relations()[1]
+        article_disease_dict = dbi.return_article_dict(disease_relations)
+        article_compound_dict = dbi.return_article_dict(compound_relations)
+        value_disease_relations = set_value(disease_relations)
+        value_compound_relations = set_value(compound_relations)
+        write_circlejson(value_disease_relations, "diseases")
+        write_circlejson(value_compound_relations, "compounds")
+        writetofile(dbi.return_json_termlist(disease_term_list), "diseasetermlist")
+        writetofile(dbi.return_json_termlist(compound_term_list), "compoundtermlist")
+        writetofile(article_disease_dict, "articlesdis")
+        writetofile(article_compound_dict, "articlescomp")
+        return HttpResponseRedirect('/DataMiner/Database/')
+    else:
+        return HttpResponseRedirect('/DataMiner/Database/')
+
+def update_database(request):
+    dbi = DbInteractions()
+    if request.method == 'POST':
+        dbi.renew_db()
         return HttpResponseRedirect('/DataMiner/Database/')
     else:
         return HttpResponseRedirect('/DataMiner/Database/')

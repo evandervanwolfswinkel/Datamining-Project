@@ -230,7 +230,7 @@ a.tip:hover span {
     <div style="overflow-y: scroll; height:590px;">
     <ul id="myUL">
         {% for values in articledislist.values %}
-            <li ><a class="tip"  href="https://www.ncbi.nlm.nih.gov/pubmed/{{values.3}}/" target="_blank">{{values.0}} [{{ values.4 }}]<span>{{ values.2 }}</span> </a>
+            <li ><a class="tip"  href="https://www.ncbi.nlm.nih.gov/pubmed/{{values.3}}/" target="_blank">{{values.0}}({{ values.1 }}) [{{ values.4 }}]<span>{{ values.2 }}</span> </a>
             </li>
         {% endfor %}
     </ul>

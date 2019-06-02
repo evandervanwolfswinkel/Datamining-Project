@@ -8,6 +8,7 @@ urlpatterns = [
     path('Compounds/', views.circle_compounds, name='circle_compounds'),
     path('Database/', views.database, name='database'),
     path('UpdatingRelationships/', views.update_relationships, name='update_relationships'),
+    path('UpdatingDatabase/', views.update_database, name='update_database'),
     path('About/', views.about, name='about')
 
 ]

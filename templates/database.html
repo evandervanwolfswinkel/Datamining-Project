@@ -12,6 +12,7 @@
             term: <input type="text" name="term">
             <input type="radio" name="type" value="dis"> Disease
             <input type="radio" name="type" value="comp"> Compound
+            <input type="radio" name="type" value="bg"> Bitter Gourd
             <input type="submit" value="Submit"><br>
             <br>
         </form>
@@ -51,12 +52,23 @@
         Amount of relationships: {{ relationcount }} <br>
         Amount of articles:      {{ articlecount }}
     </div>
+    <br>
+    <div title="Dont forget to update the database after changing bitter gourd list!">
+        <form action="/DataMiner/UpdatingDatabase/" method="post">
+            {% csrf_token %}
+        <input style="color: white; background-color: red" type="submit" value="Update database">
+        </form>
+
+    </div>
 
     </class>
     <script>
 function infomsg() {
   alert("After adding or removing search terms, you should always update the relationships tied to those " +
-      "terms, this process may take some time depending on how many search terms the lists contain.");
+      "terms, this process may take some time depending on how many search terms the lists contain." +
+      " " +
+      "If you add bitter gourd synonyms, you should use the red update database button, this process automatically " +
+      "updates relationships for you.");
 }
 </script>
 {% endblock %}
