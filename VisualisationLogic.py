@@ -4,91 +4,83 @@
 
 import json
 
-""" functie: hardgecodeerde dictionaries zoals ze uit de database opgehaald worden
-return: deze functie returnt de dictionarys 'diseaes' en 'compounds'
-"""
-
-
-def dictionaries():
-    diseases = {'cancer': {
-        'kinase': [23475945, 25488547, 26537230, 21429659, 22266361, 19789297, 27748816, 22191569, 23533514, 26370527,
-                   26018422, 26764240, 22272214, 26926586, 26487740, 23843889, 25264226, 15236800, 20731662, 24789581],
-        'gallic acid': [17566887, 18515231], 'caffeic acid': [26370527], 'catechin': [18515231]},
-        'Melanoma': {'kinase': [26537230, 26370527], 'caffeic acid': [26370527]},
-        'obesity': {'kinase': [22623391, 31005847, 27751827, 27973445, 29892950, 18355726],
-                    'catechin': [26778479]}}
-
-    compounds = {'kinase': {
-        'cancer': [23475945, 25488547, 26537230, 21429659, 22266361, 19789297, 27748816, 22191569, 23533514, 26370527,
-                   26018422, 26764240, 22272214, 26926586, 26487740, 23843889, 25264226, 15236800, 20731662, 24789581],
-        'Melanoma': [26537230, 26370527], 'obesity': [22623391, 31005847, 27751827, 27973445, 29892950, 18355726]},
-        'gallic acid': {'cancer': [17566887, 18515231]},
-        'caffeic acid': {'cancer': [26370527], 'Melanoma': [26370527]},
-        'catechin': {'obesity': [26778479], 'cancer': [18515231]}}
-
-    return diseases, compounds
-
-
-""" functie: zet de variabele dict om naar een json file
-ict: de gegenereerde dictionary in de fucntie: set_value  {key 1 : {key 2 : integer} }
-name: een variabele die aangeeft of key 1 diseaes of compounds bevat.
-return: als return schrijft deze functie een bestand 'compounds.json' of 'diseases.json' weg. 
-"""
-
 
 def write_circlejson(dict, name):
+    """ Deze functie zet de variabele dict om naar een json file
+
+    :param         dict, de gegenereerde dictionary in de functie: set_value  {key 1 : {key 2 : integer} }
+    :param         name, een variabele die aangeeft of key 1 diseaes of compounds bevat.
+    :return        als return schrijft deze functie een bestand 'compounds.json' of 'diseases.json' weg.
+    """
+
     control_list = []
     child_dict = {}
     full_dict = {"name": "{}".format(name),
                  "children": []}
-    for i in dict.keys():
-        for j in dict[i].keys():
+    for key1 in dict.keys():
+        for key2 in dict[key1].keys():
 
-            if i not in control_list:
+            if key1 not in control_list:
 
-                control_list.append(i)
-                child_dict = [{"name": j,
-                               "size": dict[i][j]}]
+                control_list.append(key1)
+                child_dict = [{"name": key2,
+                               "size": dict[key1][key2]}]
 
-            elif i in control_list:
+            elif key1 in control_list:
 
-                t = {"name": j,
-                     "size": dict[i][j]}
-                child_dict.append(t)
+                child2_dict = {"name": key2,
+                               "size": dict[key1][key2]}
+                child_dict.append(child2_dict)
 
-        full_dict["children"].append({"name": i, "children": child_dict})
+        full_dict["children"].append({"name": key1, "children": child_dict})
 
     dic_tem = json.dumps(full_dict, indent=4)
     writetofile(dic_tem, name)
 
 
-"""functie: Telt het aantal pubmedID's per combinatie van 
-termen (obesitas en kinase, obesitas en gallic acid etc)
-dict: een dictionary met hierin een dictionary {key 1 : {key 2 : [pubmedID's] } }. 
-return: een dictionary met hierin een dictionary, 
-de value is nu een integer van het aantal pubmedID's {key 1 : {key 2 : integer} }
-"""
-
-
 def set_value(dict):
-    for i in dict.keys():
-        key = i
-        for j in dict[i].keys():
-            dict[key][j] = len(dict[key][j])
+    """Deze functie telt het aantal pubmedID's per combinatie van
+       termen (obesitas en kinase, obesitas en gallic acid etc)
+
+       :param dict:     een dictionary met hierin een dictionary {key 1 : {key 2 : [pubmedID's] } }.
+       :return          een dictionary met hierin een dictionary,
+                        de value is nu een integer van het aantal pubmedID's {key 1 : {key 2 : integer} }
+       """
+    for key1 in dict.keys():
+        for key2 in dict[key1].keys():
+            dict[key1][key2] = len(dict[key1][key2])
 
     return dict
 
 
 def writetofile(data, name):
+    """ Deze functie schrijft de eerder gegenereerde dictionary om naar een JSON file.
+
+    :param data:        raw data from the SQL database
+    :param name:        een string die aangeeft of de param 'data' diseases of compounds als eerste key bevat
+    :return:            een bestand genaamd 'diseases' of 'compounds' dat wordt weggeschreven
+    """
     with open(definestaticpath() + '{}.json'.format(name), 'w') as file:
         file.write(data)
         file.close()
 
+
 def openjson(name):
+    """ Deze functie opent het eerder weggeschreven JSON file
+
+    :param name:        een string die aangeeft om welk te openen file het gaat 'diseases' of 'compounds'
+    :return:            het geopende bestand 'jsonobj'
+    """
     path = definestaticpath()
     with open(path + '{}.json'.format(name)) as file:
         jsonobj = json.load(file)
     return jsonobj
+
+
 def definestaticpath():
+    """ Deze functie returnt een file paht
+
+    :return: file path
+    """
     path = "DataMiner/static/"
     return path
