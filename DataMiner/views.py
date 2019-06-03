@@ -12,12 +12,14 @@ def about(request):
 def circle_diseases(request):
     compound_snym_list = openjson("compoundtermlist")
     articlejson = openjson("articlesdis")
-    return render(request, "circle_diseases.html", {'compound_list':compound_snym_list,'articledislist':articlejson})
+    return render(request, "circle_diseases.html", {'compound_list':compound_snym_list,
+                                                    'articledislist':articlejson})
 
 def circle_compounds(request):
     disease_snym_list = openjson("diseasetermlist")
     articlejson = openjson("articlescomp")
-    return render(request, "circle_compounds.html", {'disease_list':disease_snym_list,'articlecomplist':articlejson})
+    return render(request, "circle_compounds.html", {'disease_list':disease_snym_list,
+                                                     'articlecomplist':articlejson})
 
 def database(request):
     dbi = DbInteractions()
