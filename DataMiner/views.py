@@ -6,6 +6,7 @@ from DbInteractions import DbInteractions
 @:Date last edited: 4-6-2019
 @:Function: Below functions are used as views that are connected to URLS in urls.py
 """
+
 def error(request):
     """
     GET requests error messages and parses them into HTML error page

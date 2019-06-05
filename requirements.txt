@@ -3,5 +3,5 @@ pip==9.0.1
 pytz==2019.1
 setuptools==28.8.0
 sqlparse==0.3.0
-biopython==1.7.1
-mysql-connector==2.1.6
+biopython==1.71
+mysql-connector==2.2.9
