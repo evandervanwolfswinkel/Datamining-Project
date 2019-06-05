@@ -1,5 +1,7 @@
 class Article:
-    """Class for storing articles within an object.
+    """
+        @:Author: Anton Ligterink
+        @:Function: Class for storing articles within an object.
     """
 
     def __init__(self, title, abstract, year, pubmed_id):

@@ -4,6 +4,11 @@ from django.contrib.staticfiles.views import serve
 from django.views.decorators.cache import cache_control
 from Datamining_Project import settings
 from . import views
+"""
+@:Author: Evander van Wolfswinkel
+@:Date last edited: 5-6-2019
+@:Function: urlpatterns are used to route HTTP URLS to views in views.py
+"""
 
 urlpatterns = [
     path('', views.index, name='index'),

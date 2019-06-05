@@ -10,7 +10,11 @@ Entrez.email = "anton.ligterink@gmail.com"
 
 
 class DbInteractions:
-    """Class for interactions with the MySQL database.
+    """
+        @:Author: Anton Ligterink
+        @:Function:
+
+    Class for interactions with the MySQL database.
     Uses the MySqlCon class for connection establishing and
     the Article class for article processing.
 

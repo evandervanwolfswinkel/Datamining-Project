@@ -4,7 +4,9 @@ import mysql.connector
 
 
 class MySqlCon:
-    """Class for submitting queries to the MySQL database.
+    """
+    @:Author: Anton Ligterink
+    @:Function: Class for submitting queries to the MySQL database.
     """
     def __init__(self):
         """Constructor method for the MySqlCon class.
