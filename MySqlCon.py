@@ -13,10 +13,10 @@ class MySqlCon:
         Sets up the connection within the cursor object.
         """
         self.config = {
-            'host':     'hannl-hlo-bioinformatica-mysqlsrv.mysql.database.azure.com',
-            'user':     'owe7_pg7@hannl-hlo-bioinformatica-mysqlsrv.mysql.database.azure.com',
-            'password': 'blaat1234',
-            'database': 'owe7_pg7'}
+            'host':     '',
+            'user':     '',
+            'password': '',
+            'database': ''}
         try:
             self.conn = mysql.connector.connect(**self.config)
         except mysql.connector.errors.InterfaceError:
